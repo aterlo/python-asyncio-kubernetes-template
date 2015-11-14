@@ -1,0 +1,45 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"python-asyncio-kubernetes-template",
+      "labels":{
+         "name":"python-asyncio-kubernetes-template"
+      }
+   },
+   "spec":{
+      "replicas": 10,
+      "selector":{
+         "name":"python-asyncio-kubernetes-template"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "name":"python-asyncio-kubernetes-template"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"master",
+                  "image":"gcr.io/YOUR_PROJECT_NAME/python-asyncio-kubernetes-template:latest",
+                  "livenessProbe": {
+                    "httpGet": {
+                        "path": "/healthcheck/",
+                        "port": 8080
+                    },
+                    "initialDelaySeconds": 15,
+                    "timeoutSeconds": 1
+                  },
+                  "ports":[
+                     {
+                        "containerPort": 8080,
+                        "protocol": "TCP"
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

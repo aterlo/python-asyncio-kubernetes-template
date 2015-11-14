@@ -1,0 +1,20 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "simple-server-service"
+    },
+    "spec": {
+        "selector": {
+            "name": "python-asyncio-kubernetes-template"
+        },
+        "ports": [
+            {
+                "protocol": "TCP",
+                "port": 80,
+                "targetPort": 8080
+            }
+        ],
+        "type": "LoadBalancer"
+    }
+}
