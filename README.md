@@ -40,6 +40,9 @@ systemctl enable docker.service
 ```
 
 ### Build the container image
+This example uses a Fedora container image as the base and installs third party Python 3.5 packages because Python 3.5
+is not yet available in Fedora 23. If you want to use another distribution (why would you?) just edit the Dockerfile.
+
 While inside the repository directory:
 ```
 docker build .
