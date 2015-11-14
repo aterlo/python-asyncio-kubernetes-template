@@ -4,7 +4,7 @@ A simple example of a micro-service written using Python Asyncio and hosted on K
 This repository has two goals:
 - Provide a complete example, and later short tutorial, on how to run a Python Asyncio based application on Kubernetes
   / Google Container Engine.
-- Document my current understand of how best to structure the basics of a Python Asyncio application for use with
+- Document my current understanding of how best to structure the basics of a Python Asyncio application for use with
   Kubernetes. Specifically this refers to things like handling the shut down (SIGTERM) signal. It took me a while to
   figure this out so hopefully this example will save others time.
 
@@ -76,6 +76,21 @@ cloud container clusters get-credentials CLUSTER_NAME
 ```
 kubectl create -f controller.json
 ```
+
+### Optional - Start a Service External Load Balancer
+When a replication controller and its pods are created, none of the pods are reachable. If you
+want to reach them you need to create a service. The example service.json file creates a load balancer service which
+makes the pods reachable to the Internet. If you just need them reachable within the cluster set the type to ClusterIP.
+
+See http://kubernetes.io/v1.0/docs/user-guide/services.html for more information.
+
+Once the service is up you can get its IP, including the external one Google allocates by running:
+
+```
+kubectl get services
+```
+
+Note that it seems to take a little while for the external IP address to be assigned.
 
 ### Useful Commands
 
