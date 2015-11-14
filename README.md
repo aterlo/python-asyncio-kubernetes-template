@@ -12,7 +12,7 @@ If you know of a better way to accomplish any of this please get in touch or sub
 
 ## Not 100% Complete Tutorial
 
-### Create A Google Cloud Services Account and a Docker Cluster
+### Create A Google Cloud Services Account and Google Container Engine Cluster
 
 All of this can be done in the Google Developers Console. Google has good docs on this.
 
@@ -47,7 +47,9 @@ docker build .
 
 When complete you will be able to see the image when listing the available Docker images.
 
-`docker images`
+```
+docker images
+```
 
 ### Tag the container image.
 Now we need to tag the image to upload it to the Google Container Registry (GCR). Each Google Cloud project has it's own GCR name space. Replace the image ID and Google cloud project name in the example below.
@@ -57,7 +59,41 @@ docker tag -f IMAGE_ID gcr.io/PROJECT_ID/python-asyncio-kubernetes-template:late
 ```
 
 ### Push the container image to GCR.
+You'll need to authenticate with Google and set the project and region/zone before this will work.
+
 ```
 gcloud docker push gcr.io/PROJECT_ID/python-asyncio-kubernetes-template:latest
 ```
 
+### Get Cluster Credentials for Kubernetes
+
+```
+cloud container clusters get-credentials CLUSTER_NAME
+```
+
+### Start the Container
+
+```
+kubectl create -f controller.json
+```
+
+### Useful Commands
+
+```
+kubectl get rc
+```
+
+```
+kubectl get pods
+```
+
+```
+kubectl logs PODNAME
+```
+
+```
+kubectl scale --replicas=1 replicationcontrollers python-asyncio-kubernetes-template
+```
+
+Also, your Docker, Kubernetes and container logs should now be available in Google Cloud Logging. The output of the
+containers doesn't seem to integrate very well into Cloud Logging well though (as of 2015-11).
