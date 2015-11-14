@@ -9,3 +9,24 @@ This repository has two goals:
   figure this out so hopefully this example will save others time.
 
 If you know of a better way to accomplish any of this please get in touch or submit a PR.
+
+## Not 100% Complete Tutorial
+### Install and start Docker on your local machine.
+Fedora
+```
+dnf install docker
+```
+```
+systemctl start docker.service
+```
+Note that the above only starts the docker service once. You need to enable the service if you want it to start on
+every boot.
+```
+systemctl enable docker.service
+```
+
+### Build the container image
+While inside the repository directory:
+```
+docker build .
+```
