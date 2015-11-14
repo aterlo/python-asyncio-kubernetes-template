@@ -77,14 +77,14 @@ cloud container clusters get-credentials CLUSTER_NAME
 kubectl create -f controller.json
 ```
 
-### Optional - Start a Service External Load Balancer
+### Optional - Start a Service (Load Balancer)
 When a replication controller and its pods are created, none of the pods are reachable. If you
 want to reach them you need to create a service. The example service.json file creates a load balancer service which
-makes the pods reachable to the Internet. If you just need them reachable within the cluster set the type to ClusterIP.
+makes the pods reachable from the Internet. If you just need them reachable within the cluster, set the type to ClusterIP.
 
 See http://kubernetes.io/v1.0/docs/user-guide/services.html for more information.
 
-Once the service is up you can get its IP, including the external one Google allocates by running:
+Once the service is up you can get its IP, including the external IP Google allocates by running:
 
 ```
 kubectl get services
